@@ -20,10 +20,15 @@ yargs.command({
         describe: 'Note title',
         demandOption: true,
         type: 'string'
+      },
+      body: {
+        describe: "Adding a todo note",
+        demandOption: true,
+        type: 'string'
       }
   },
   handler: function(argv){
-    console.log("adding a new note", argv);
+    console.log("Title: " + argv.title + "\nTodo: " + argv.body);
   }
 });
 
@@ -54,4 +59,4 @@ yargs.command({
   }
 });
 
-console.log(yargs.argv);
+yargs.parse();
