@@ -15,8 +15,15 @@ const chalk = require('chalk');
 yargs.command({
   command: 'add',
   describe: 'Add a new note',
-  handler: function(){
-    console.log("adding a new note");
+  builder: {
+      title: {
+        describe: 'Note title',
+        demandOption: true,
+        type: 'string'
+      }
+  },
+  handler: function(argv){
+    console.log("adding a new note", argv);
   }
 });
 
