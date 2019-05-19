@@ -1,14 +1,6 @@
-//const fs = require('fs');
-//writeFileSync();
-//appendFileSync();
-//fs.writeFileSync('notes.txt', 'this file was created by node.js and ' + name);
-//fs.appendFileSync('notes.txt', '\nmy name is: ' + name);
-
-//load files
 const yargs = require('yargs');
 const validator = require('validator');
-//const add = require('./utils.js');
-const notas = require('./notes.js');
+const notes = require('./notes.js');
 const chalk = require('chalk');
 
 //Create add command;
@@ -28,7 +20,7 @@ yargs.command({
       }
   },
   handler: function(argv){
-    console.log("Title: " + argv.title + "\nTodo: " + argv.body);
+    notes.addNote(argv.title, argv.body)
   }
 });
 
