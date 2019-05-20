@@ -61,8 +61,26 @@ const removeNote = function(title){
   }
 }
 
+//SHOWING ALL NOTES
+const showAllNotes = function(){
+  const notes = loadNotes();
+  if(Array.isArray(notes) && notes.length === 0){
+    console.log("You don't have any note");
+  } else {
+    for(let i = 0; i < notes.length; i++){
+      console.log(chalk.green.inverse(notes[i].title));
+    }
+  }
+
+  //forEach version
+  /*notes.forEach((note) => {
+    console.log(note.title);
+  });*/
+}
+
 module.exports = {
   getNotes: getNotes,
   addNote: addNote,
-  removeNote: removeNote
+  removeNote: removeNote,
+  showAllNotes: showAllNotes
 }
