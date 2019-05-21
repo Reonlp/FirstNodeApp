@@ -5,14 +5,19 @@ const getNotes = function getNotes(){
     return "Your notes...";
 }
 
-//Adding a new note
+//ADDING A NEW NOTE
 const addNote = function(title, body){
   const notes = loadNotes();
-  const duplicateNotes = notes.filter(function(note){
-    return note.title === title
-  })
 
-  if(duplicateNotes.length === 0){
+  //Filter will loop through all the array, that's why is preferable in this case to use find
+  /*const duplicateNotes = notes.filter(function(note){
+    return note.title === title
+  });*/
+
+  //It will return undefined if a match is not found
+  const duplicateNote = notes.find((note) => note.title === title);
+
+  if(duplicateNote === undefined){
     notes.push({
       title: title,
       body: body
@@ -45,6 +50,19 @@ const loadNotes = function(){
 
 }
 
+//READ NOTE
+const readNote = function(title){
+  const notes = loadNotes();
+  const note = notes.find((note) => note.title === title);
+
+  if (note) {
+    console.log(chalk.inverse(note.title));
+    console.log(note.body);
+  } else {
+    console.log(chalk.red.inverse("No note was found"));
+  }
+}
+
 //REMOVE NOTE
 const removeNote = function(title){
   const notes = loadNotes();
@@ -59,6 +77,17 @@ const removeNote = function(title){
   } else {
     console.log(chalk.green.inverse("note removed successfully"));
   }
+}
+
+//LISTIN ALL NOTES
+const listNotes = function(){
+  const notes = loadNotes();
+
+  console.log(chalk.inverse('Your notes'));
+
+  notes.forEach((note) => {
+    console.log(note.title);
+  })
 }
 
 //SHOWING ALL NOTES
@@ -82,5 +111,7 @@ module.exports = {
   getNotes: getNotes,
   addNote: addNote,
   removeNote: removeNote,
-  showAllNotes: showAllNotes
+  showAllNotes: showAllNotes,
+  listNotes: listNotes,
+  readNote: readNote
 }

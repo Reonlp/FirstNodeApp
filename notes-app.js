@@ -3,7 +3,7 @@ const validator = require('validator');
 const notes = require('./notes.js');
 const chalk = require('chalk');
 
-//Create add command;
+//CREATE A NOTE COMMAND
 yargs.command({
   command: 'add',
   describe: 'Add a new note',
@@ -24,7 +24,7 @@ yargs.command({
   }
 });
 
-//Remove note command
+//REMOVE A NOTE COMMAND
 yargs.command({
   command: 'remove',
   describe: 'Remove a note',
@@ -40,7 +40,7 @@ yargs.command({
   }
 });
 
-//List command
+//LIST COMMAND
 yargs.command({
   command: 'list',
   describe: 'List all your  notes',
@@ -49,12 +49,19 @@ yargs.command({
   }
 });
 
-//Create read command
+//READ COMMAND
 yargs.command({
   command: 'read',
   describe: 'Read a note',
-  handler: function(){
-    console.log("Reading a note");
+  builder: {
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string'
+    }
+  },
+  handler: function(argv){
+    notes.readNote(argv.title);
   }
 });
 
